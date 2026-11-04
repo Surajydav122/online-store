@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>Admin Dashboard</title>
+
+    <link
+            rel="stylesheet"
+            href="/css/style.css"
+    >
+
+</head>
+
+<body>
+
+<nav>
+
+    <h2>Admin Dashboard</h2>
+
+    <div>
+
+        <a href="/">
+            Store
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+<div class="container-wide">
+
+    <h1>Product Management</h1>
+
+    <a
+            href="/admin/products/new"
+            class="btn"
+    >
+        Add New Product
+    </a>
+
+    <br>
+    <br>
+
+    <table>
+
+        <thead>
+
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Sale Price</th>
+            <th>Sale</th>
+            <th>Stock</th>
+            <th>Actions</th>
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <tr
+                th:each="product : ${products}"
+        >
+
+            <td
+                    th:text="${product.id}">
+            </td>
+
+            <td
+                    th:text="${product.name}">
+            </td>
+
+            <td
+                    th:text="${product.price}">
+            </td>
+
+            <td
+                    th:text="${product.salePrice}">
+            </td>
+
+            <td
+                    th:text="${product.onSale}">
+            </td>
+
+            <td
+                    th:text="${product.stock}">
+            </td>
+
+            <td>
+
+                <a
+                        th:href="@{/admin/products/edit/{id}(id=${product.id})}">
+                    Edit
+                </a>
+
+                |
+
+                <a
+                        th:href="@{/admin/products/delete/{id}(id=${product.id})}"
+                        onclick="return confirm('Delete this product?')">
+                    Delete
+                </a>
+
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>

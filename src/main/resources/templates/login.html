@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Login - Online Store</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Online Store</h1>
+
+    <h2>Login</h2>
+
+    <form method="post" action="/login">
+
+        <input
+                type="email"
+                name="username"
+                placeholder="Email"
+                required
+        >
+
+        <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                required
+        >
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+    <p>
+        Don't have an account?
+        <a href="/register">Register</a>
+    </p>
+
+</div>
+
+</body>
+</html>

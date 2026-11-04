@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>Product Form</title>
+
+    <link
+            rel="stylesheet"
+            href="/css/style.css"
+    >
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Product</h1>
+
+    <form
+            th:action="@{/admin/products/save}"
+            th:object="${product}"
+            method="post"
+    >
+
+        <input
+                type="hidden"
+                th:field="*{id}"
+        >
+
+        <label>
+            Product Name
+        </label>
+
+        <input
+                type="text"
+                th:field="*{name}"
+                required
+        >
+
+
+        <label>
+            Description
+        </label>
+
+        <textarea
+                th:field="*{description}"
+                rows="5"
+                required
+        ></textarea>
+
+
+        <label>
+            Price
+        </label>
+
+        <input
+                type="number"
+                step="0.01"
+                th:field="*{price}"
+                required
+        >
+
+
+        <label>
+            Sale Price
+        </label>
+
+        <input
+                type="number"
+                step="0.01"
+                th:field="*{salePrice}"
+        >
+
+
+        <label>
+
+            <input
+                    type="checkbox"
+                    th:field="*{onSale}"
+            >
+
+            On Sale
+
+        </label>
+
+
+        <label>
+            Stock
+        </label>
+
+        <input
+                type="number"
+                th:field="*{stock}"
+                required
+        >
+
+
+        <label>
+            Image URL
+        </label>
+
+        <input
+                type="text"
+                th:field="*{imageUrl}"
+        >
+
+
+        <button type="submit">
+            Save Product
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="/admin">
+        Back to Dashboard
+    </a>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>Previous Orders</title>
+
+    <link
+            rel="stylesheet"
+            href="/css/style.css"
+    >
+
+</head>
+
+<body>
+
+<h1>Previous Orders</h1>
+
+<a href="/">Continue Shopping</a>
+
+<div th:if="${#lists.isEmpty(orders)}">
+
+    <h2>No orders found.</h2>
+
+</div>
+
+<div
+        th:each="order : ${orders}"
+        class="product"
+>
+
+    <h2>
+        Order #
+        <span th:text="${order.id}"></span>
+    </h2>
+
+    <p>
+        Date:
+        <span
+                th:text="${order.orderDate}">
+        </span>
+    </p>
+
+    <p>
+        Status:
+        <strong
+                th:text="${order.status}">
+        </strong>
+    </p>
+
+    <p>
+        Total:
+        ₹
+        <span
+                th:text="${order.totalAmount}">
+        </span>
+    </p>
+
+    <h3>Items</h3>
+
+    <ul>
+
+        <li
+                th:each="item : ${order.items}"
+        >
+
+            <span
+                    th:text="${item.product.name}">
+            </span>
+
+            ×
+
+            <span
+                    th:text="${item.quantity}">
+            </span>
+
+        </li>
+
+    </ul>
+
+</div>
+
+</body>
+</html>

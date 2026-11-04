@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <div
+            sec:authorize="hasRole('ADMIN')"
+    >
+
+        <a href="/admin">
+            Admin Dashboard
+        </a>
+
+    </div>
+
+    <title>Online Store</title>
+
+    <link
+            rel="stylesheet"
+            href="/css/style.css"
+    >
+
+</head>
+
+<body>
+
+<nav>
+
+    <h2>Online Store</h2>
+
+    <div>
+
+        <a href="/">Home</a>
+
+        <a href="/cart">
+            Cart
+        </a>
+
+        <a href="/orders">
+            My Orders
+        </a>
+
+        <a href="/login">
+            Login
+        </a>
+
+    </div>
+
+</nav>
+
+
+<section>
+
+    <h1>Available Products</h1>
+
+    <div class="products">
+
+        <div
+                class="product"
+                th:each="product : ${products}"
+        >
+
+            <img
+                    th:src="${product.imageUrl}"
+                    alt="Product"
+            >
+
+            <h3
+                    th:text="${product.name}">
+            </h3>
+
+            <p
+                    th:text="${product.description}">
+            </p>
+
+            <p>
+                ₹
+                <span
+                        th:text="${product.price}">
+                </span>
+            </p>
+
+            <a
+                    th:href="@{/products/{id}(id=${product.id})}">
+                View Details
+            </a>
+
+            <form
+                    th:action="@{/cart/add/{id}(id=${product.id})}"
+                    method="post">
+
+                <button type="submit">
+                    Add to Cart
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section>
+
+    <h1>Items on Sale</h1>
+
+    <div class="products">
+
+        <div
+                class="product"
+                th:each="product : ${saleProducts}"
+        >
+
+            <h3
+                    th:text="${product.name}">
+            </h3>
+
+            <p>
+                Original:
+                <del
+                        th:text="${product.price}">
+                </del>
+            </p>
+
+            <p>
+                Sale Price:
+                <strong
+                        th:text="${product.salePrice}">
+                </strong>
+            </p>
+
+            <form
+                    th:action="@{/cart/add/{id}(id=${product.id})}"
+                    method="post">
+
+                <button type="submit">
+                    Add to Cart
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>

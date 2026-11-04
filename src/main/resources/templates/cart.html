@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>My Cart</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<h1>My Cart</h1>
+
+<a href="/">Continue Shopping</a>
+
+<div th:if="${#lists.isEmpty(cartItems)}">
+
+    <h2>Your cart is empty.</h2>
+
+</div>
+
+<table th:unless="${#lists.isEmpty(cartItems)}">
+
+    <thead>
+
+    <tr>
+
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Action</th>
+
+    </tr>
+
+    </thead>
+
+    <tbody>
+
+    <tr th:each="item : ${cartItems}">
+
+        <td
+                th:text="${item.product.name}">
+        </td>
+
+        <td
+                th:text="${item.product.price}">
+        </td>
+
+        <td
+                th:text="${item.quantity}">
+        </td>
+
+        <td>
+
+            <a
+                    th:href="@{/cart/remove/{id}(id=${item.id})}">
+                Remove
+            </a>
+
+        </td>
+        <td>
+
+            <a
+                    th:href="@{/cart/decrease/{id}(id=${item.id})}"
+            >
+                −
+            </a>
+
+            <span
+                    th:text="${item.quantity}">
+    </span>
+
+            <a
+                    th:href="@{/cart/increase/{id}(id=${item.id})}"
+            >
+                +
+            </a>
+
+        </td>
+
+    </tr>
+
+    </tbody>
+
+</table>
+<div th:unless="${#lists.isEmpty(cartItems)}">
+
+    <form
+            method="post"
+            action="/orders/place">
+
+        <button type="submit">
+            Buy Now
+        </button>
+
+    </form>
+    <h2>
+
+        Total:
+
+        ₹
+        <span th:text="${total}">
+    </span>
+
+    </h2>
+
+    <form
+            method="post"
+            action="/orders/place"
+    >
+
+        <button type="submit">
+            Checkout / Buy Now
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
